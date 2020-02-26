@@ -9,7 +9,8 @@ CREATE TABLE shoes(
     image_1_url text,
     image_2_url text,
     image_3_url text,
-    image_4_url text
+    image_4_url text,
+    category VARCHAR(50)
 );
 
 create table users (
