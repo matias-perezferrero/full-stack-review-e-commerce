@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { connect } from "react-redux";
+import { checkUser, clearReducer } from "./redux/userReducer";
+import Header from "./components/Header";
+import routes from "./routes";
+import "./App.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor() {
+    super();
+  }
+
+  componentDidMount() {
+    this.props.checkUser();
+  }
+
+  componentWillUnmount() {
+    this.props.clearReducer()
+  }
+
+  render() {
+    let loading = this.props.userReducer.loading ? "busy-cursor" : null;
+    return (
+      <div className={`App ${loading}`}>
+        <Header />
+        {routes}
+      </div>
+    );
+  }
 }
 
-export default App;
+const mapStateToProps = reduxState => {
+  return {
+    userReducer: reduxState.userReducer
+  };
+};
+
+export default connect(mapStateToProps, { checkUser, clearReducer })(App);
