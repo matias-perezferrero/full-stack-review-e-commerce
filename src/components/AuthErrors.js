@@ -3,13 +3,12 @@ import {connect} from 'react-redux'
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-class ErrorMessage extends React.Component {
+class AuthErrors extends React.Component {
   render() {
     if (this.props.userReducer.error)
       toast.error(`${this.props.userReducer.errorMessage}`, {
         position: toast.POSITION.BOTTOM_RIGHT
       });
-      
     return (
       <div>
         <ToastContainer autoClose={1500} />
@@ -24,4 +23,4 @@ const mapStateToProps = reduxState => {
   };
 };
 
-export default connect(mapStateToProps)(ErrorMessage);
+export default connect(mapStateToProps)(AuthErrors);

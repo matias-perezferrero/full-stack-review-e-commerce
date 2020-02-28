@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Products from "./Products";
-import { Link, Route } from "react-router-dom";
+import shopHome from './shopHome'
+import {connect} from 'react-redux'
+import { Link, Route, Redirect } from "react-router-dom";
 import axios from "axios";
 
 
@@ -27,6 +29,8 @@ class Shop extends Component {
     }
 
   render() {
+    if(!this.props.userReducer.user.user_email) return <Redirect to="/" />
+    
     let categories = this.state.products.reduce((categories, product) => {
       if (!categories.includes(product.category)) {
         categories.push(product.category);
@@ -35,7 +39,7 @@ class Shop extends Component {
     }, []);
 
     return (
-      <div >
+      <div className="shop">
         <h1 style={{padding: "20px", width: "100%", textAlign: 'center'}}>Shop by Category</h1>
         <div
           style={{
@@ -52,6 +56,7 @@ class Shop extends Component {
             );
           })}
         </div>
+        <Route exact path="/shop" component={shopHome} />
         <Route path="/shop/:category" render={props => {
             return <Products {...props} products={this.state.products} getProducts={this.getProducts}/>
         }} />
@@ -60,4 +65,10 @@ class Shop extends Component {
   }
 }
 
-export default Shop
+const mapStateToProps = reduxState => {
+  return {
+    userReducer: reduxState.userReducer
+  }
+}
+
+export default connect(mapStateToProps)(Shop)

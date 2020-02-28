@@ -7,12 +7,12 @@ class Landing extends Component {
     render() {
         if (this.props.userReducer.user.user_email) return <Redirect to="/shop" />
         return (
-            <div className="landing">
-                <h2>Sign in to waste your money today!</h2>
+            <div className="landing" style={{background: 'blanchedalmond'}}>
+                <h2 style={{color: "rebeccapurple"}}>Sign in to start wasting your money right away!</h2>
                 <div id="advertisement-container">
-                <div className="advertisement" style={{background: "blanchedalmond"}}>Such Advertisement</div>
-                <div className="advertisement" style={{background: "indianred"}}>Such Advertisement</div>
-                <div className="advertisement" style={{background: "rebeccapurple"}}>Such Advertisement</div>
+                <div className="advertisement" id="one" ></div>
+                <div className="advertisement" id="two" ></div>
+                <div className="advertisement" id="three"></div>
                 </div>
             </div>
         )

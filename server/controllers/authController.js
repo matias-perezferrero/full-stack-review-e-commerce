@@ -18,7 +18,7 @@ module.exports = {
       session.user = user;
       res.status(202).send(session.user);
     } else {
-      res.status(401).send("Incorrect Password");
+      res.status(401).send("Incorrect email or password");
     }
   },
   register: async (req, res) => {

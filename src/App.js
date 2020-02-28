@@ -4,6 +4,7 @@ import { checkUser, clearReducer } from "./redux/userReducer";
 import Header from "./components/Header";
 import routes from "./routes";
 import "./App.css";
+import {withRouter} from 'react-router-dom'
 
 class App extends React.Component {
   constructor() {
@@ -14,8 +15,15 @@ class App extends React.Component {
     this.props.checkUser();
   }
 
+  componentDidUpdate(prevProps) {
+    if(prevProps.userReducer.user != this.props.userReducer.user) {
+      console.log('hit condition')
+    if(!this.props.userReducer.user.email) this.props.history.push('/')
+    }
+  }
+
   componentWillUnmount() {
-    this.props.clearReducer()
+    // this.props.clearReducer()
   }
 
   render() {
@@ -35,4 +43,4 @@ const mapStateToProps = reduxState => {
   };
 };
 
-export default connect(mapStateToProps, { checkUser, clearReducer })(App);
+export default connect(mapStateToProps, { checkUser, clearReducer })(withRouter(App));

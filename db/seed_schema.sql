@@ -1,9 +1,9 @@
-CREATE TABLE shoes(
-    shoe_id SERIAL PRIMARY KEY NOT NULL,
+CREATE TABLE products(
+    product_id SERIAL PRIMARY KEY NOT NULL,
     name VARCHAR(200),
     brand VARCHAR(200),
     colorway VARCHAR(200),
-    price INTEGER,
+    price DECIMAL,
     description VARCHAR(1350),
     year_released NUMERIC(4,0),
     image_1_url text,
@@ -18,3 +18,10 @@ create table users (
     user_email varchar(100),
     user_password varchar(250)
 );
+
+create table carts (
+    cart_id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users(user_id),
+    product_id INT REFERENCES products(product_id),
+    qty INT
+)

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { logout, login, register } from "../redux/userReducer";
 import {Link} from 'react-router-dom'
-import ErrorMessage from './ErrorMessage'
+import AuthErrors from './AuthErrors'
 
 function Header(props) {
 
@@ -85,10 +85,12 @@ function Header(props) {
         <div style={{ display: "flex", alignItems: 'center' , justifyContent: "space-evenly", width: "40%"}}>
           <h3>Logged in as: {props.userReducer.user.user_email}</h3>
           <button><Link to="/cart">Cart</Link></button>
-          <button onClick={() => props.logout()}>Logout</button> 
+          <button onClick={() => {
+            props.logout()
+            }}>Logout</button> 
         </div>
       )}
-      <ErrorMessage />
+      <AuthErrors />
     </div>
   );
 }

@@ -4,6 +4,7 @@ const express = require("express"),
   session = require("express-session"),
   authCtrl = require("./controllers/authController"),
   productCtrl = require("./controllers/productController"),
+  cartCtrl = require('./controllers/cartController.js')
   checkUser = require('./middlewares/checkUser'),
   { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env
   
@@ -38,6 +39,10 @@ app.get("/api/user", checkUser);
 
 //PRODUCT ENDPOINTS
 app.get('/api/products', productCtrl.getProducts)
+
+//CART ENDPOINTS
+app.post('/api/cart', cartCtrl.addToCart)
+app.get('/api/cart', cartCtrl.getCart)
 
 
 app.listen(SERVER_PORT, () => console.log(`Server running on ${SERVER_PORT}`));
